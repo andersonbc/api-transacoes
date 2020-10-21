@@ -1,5 +1,6 @@
-package br.com.guiabolso.desafio.infrastructure;
+package br.com.guiabolso.desafio.infrastructure
 
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,7 +20,7 @@ class TransactionsController {
         @PathVariable ano: String,
         @PathVariable mes: String
     ): ResponseEntity<String> {
-        return ResponseEntity.accepted().body("")
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("s")
     }
 
 }
