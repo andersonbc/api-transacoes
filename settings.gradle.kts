@@ -1,5 +1,5 @@
 rootProject.name = "desafio"
 
-include("usecases", "infrastructure", "application")
+include("entities", "usecases", "infrastructure", "application")
 
 

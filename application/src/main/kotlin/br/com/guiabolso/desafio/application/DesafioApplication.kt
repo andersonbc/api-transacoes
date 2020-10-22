@@ -3,7 +3,7 @@ package br.com.guiabolso.desafio.application
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication(scanBasePackages = [ "br.com.guiabolso.desafio.infrastructure" ])
+@SpringBootApplication(scanBasePackages = [ "br.com.guiabolso.desafio.**" ])
 open class DesafioApplication
 
 fun main(args: Array<String>) {
