@@ -3,5 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":entities"))
+    implementation(project(":usecases"))
     implementation(project(":infrastructure"))
 }
