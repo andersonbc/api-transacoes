@@ -1,14 +1,12 @@
 package br.com.guiabolso.desafio.usecases.transaction
 
+import br.com.guiabolso.desafio.entities.Transaction
+import br.com.guiabolso.desafio.entities.User
 import java.util.*
 import kotlin.random.Random
 import java.util.concurrent.ThreadLocalRandom
 import java.time.LocalDate
-
-
-
-
-
+import kotlin.collections.HashMap
 
 
 class CreateTransaction {
@@ -43,6 +41,25 @@ class CreateTransaction {
             }
         }
         return randomString
+    }
+
+
+    fun createTransactionsInMonth(date: String): List<Transaction> {
+        val parsedDate = LocalDate.parse(date)
+        return listOf(
+            Transaction(
+                this.generateRandomReadableDescription(),
+                this.generateRandomDate(parsedDate.withDayOfMonth(1), parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())),
+                this.generateRandomValue(),
+                false
+            ),
+            Transaction(
+                this.generateRandomReadableDescription(),
+                this.generateRandomDate(parsedDate.withDayOfMonth(1), parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())),
+                this.generateRandomValue(),
+                false
+            )
+        )
     }
 
 }
