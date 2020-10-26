@@ -46,20 +46,52 @@ class CreateTransaction {
 
     fun createTransactionsInMonth(date: String): List<Transaction> {
         val parsedDate = LocalDate.parse(date)
-        return listOf(
-            Transaction(
-                this.generateRandomReadableDescription(),
-                this.generateRandomDate(parsedDate.withDayOfMonth(1), parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())),
-                this.generateRandomValue(),
-                false
-            ),
-            Transaction(
-                this.generateRandomReadableDescription(),
-                this.generateRandomDate(parsedDate.withDayOfMonth(1), parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())),
-                this.generateRandomValue(),
-                false
+        val transactions = mutableListOf<Transaction>()
+        this.createTransactions(transactions, parsedDate)
+        this.createDuplicatedTransaction(transactions, parsedDate)
+        return transactions
+    }
+
+    private fun createTransactions(transactions: MutableList<Transaction>, parsedDate: LocalDate) {
+        val numberOfTransactions = Random.nextInt(1, 100)
+        for (i in 0..numberOfTransactions) {
+            transactions.add(
+                Transaction(
+                    this.generateRandomReadableDescription(),
+                    this.generateRandomDate(
+                        parsedDate.withDayOfMonth(1),
+                        parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())
+                    ),
+                    this.generateRandomValue(),
+                    false
+                )
             )
-        )
+        }
+    }
+
+    private fun createDuplicatedTransaction(transactions: MutableList<Transaction>, parsedDate: LocalDate) {
+        val mustHaveDuplicateTransaction = Random.nextInt(0, 3) != 0
+        if(mustHaveDuplicateTransaction) {
+            val numberOfDuplicateTransactions = Random.nextInt(2, 5)
+
+            val description = this.generateRandomReadableDescription()
+            val date = this.generateRandomDate(
+                parsedDate.withDayOfMonth(1),
+                parsedDate.withDayOfMonth(parsedDate.lengthOfMonth())
+            )
+            val value = this.generateRandomValue()
+
+            for (i in 0 .. numberOfDuplicateTransactions) {
+                transactions.add(
+                    Transaction(
+                        description,
+                        date,
+                        value,
+                        i != numberOfDuplicateTransactions
+                    )
+                )
+            }
+        }
     }
 
 }

@@ -41,4 +41,22 @@ class CreateTransactionTest {
     }
 
 
+    @Test
+    fun `Should create transaction and in one year at least 3 should be duplicated` () {
+        val createTransaction = CreateTransaction()
+
+        for (year in 2010 .. 2100) {
+            var totalDuplicates = 0
+            for (i in 1..12) {
+                val month = if (i < 10) "0${i}" else "$i"
+                val transactions = createTransaction.createTransactionsInMonth("${year}-${month}-01")
+
+                if (transactions.any { it.duplicated }) totalDuplicates += 1
+            }
+
+            Assertions.assertTrue(totalDuplicates >= 3)
+        }
+    }
+
+
 }

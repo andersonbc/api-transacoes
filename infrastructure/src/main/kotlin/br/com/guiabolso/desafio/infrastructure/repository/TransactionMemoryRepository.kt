@@ -15,7 +15,7 @@ class TransactionMemoryRepository : ITransactionRepository {
 
     override fun findTransactionUserByDate(id: String, ano: String, mes: String): List<Transaction> {
 
-        val date = "${ano}-${mes}-01" //melhorar
+        val date = "${ano}-${mes}-01"
         if(userExist(id)) {
             val user = users[id]!!
             if(!user.userHasTransactionInDate(date)){
